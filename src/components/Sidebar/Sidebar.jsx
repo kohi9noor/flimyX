@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Divider,
   List,
@@ -6,91 +6,99 @@ import {
   ListItemText,
   ListSubheader,
   ListItemIcon,
-  Box,
   CircularProgress,
+  ListItemButton,
+  Box,
 } from "@mui/material";
-
 import { Link } from "react-router-dom";
 import { useTheme } from "@mui/styles";
 import useStyles from "./style";
 import { useGetGenresQuery } from "../../services/TMDB";
+import genreIcons from "../../assets/genres/index";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
-import genereIcons from "../../assets/genres/index";
+const redLogo =
+  "https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png";
+
+const blueLogo =
+  "https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png";
+
 const categories = [
-  {
-    label: "Popular",
-    value: "popular",
-  },
-  {
-    label: "Top Rated",
-    value: "top_rated",
-  },
-  {
-    label: "Upcoming",
-    value: "coming",
-  },
+  { label: "Popular", value: "popular" },
+  { label: "Top Rated", value: "top_rated" },
+  { label: "Upcoming", value: "upcoming" },
 ];
 
 const Sidebar = ({ setMobileOpen }) => {
-  const dispatch = useDispatch();
+  const { genreIdOrCategoryName } = useSelector(
+    (state) => state.currentGenreOrCategory
+  );
   const theme = useTheme();
   const classes = useStyles();
   const { data, isFetching } = useGetGenresQuery();
-  const light = `https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png`;
-  const dark = `https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png`;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [genreIdOrCategoryName]);
 
   return (
     <>
-      <Link to="/" className={classes.imageLink}>
+      <Link to="/" className={classes.imgLink}>
         <img
-          src={theme.palette.mode === `light` ? light : dark}
-          className={classes.image}
-          alt="FLIMYX-LOGO"
+          src={theme.palette.mode === "light" ? redLogo : blueLogo}
+          alt="Filmpire Logo"
+          className={classes.img}
         />
       </Link>
       <Divider />
       <List>
         <ListSubheader>Categories</ListSubheader>
         {categories.map(({ label, value }) => (
-          <Link key={value} className={classes.links} to="/">
-            <ListItem
-              onClick={() => dispatch(selectGenreOrCategory(value))}
-              button
+          <Link key={value} to="/" className={classes.links}>
+            <ListItemButton
+              onClick={() => {
+                dispatch(selectGenreOrCategory(value));
+              }}
             >
               <ListItemIcon>
                 <img
-                  src={genereIcons[label.toLowerCase()]}
+                  src={genreIcons[label.toLowerCase()]}
+                  alt="icons"
                   className={classes.genreImages}
                   height={30}
                 />
               </ListItemIcon>
               <ListItemText primary={label} />
-            </ListItem>
+            </ListItemButton>
           </Link>
         ))}
       </List>
       <Divider />
       <List>
-        <ListSubheader>Generes</ListSubheader>
-
+        <ListSubheader>Genres</ListSubheader>
         {isFetching ? (
-          <Box display="flex" justifyContent="center">
-            <CircularProgress size="4rem" />
+          <Box justifyContent="center" display="flex">
+            <CircularProgress />
           </Box>
         ) : (
           data.genres.map(({ name, id }) => (
-            <Link key={name} className={classes.links} to="/">
-              <ListItem onClick={() => {}} button>
+            <Link key={id} to="/" className={classes.links}>
+              <ListItemButton
+                onClick={() => {
+                  dispatch(selectGenreOrCategory(id));
+                }}
+              >
                 <ListItemIcon>
                   <img
-                    src={genereIcons[name.toLowerCase()]}
+                    src={genreIcons[name.toLowerCase()]}
+                    alt="icons"
                     className={classes.genreImages}
                     height={30}
                   />
                 </ListItemIcon>
                 <ListItemText primary={name} />
-              </ListItem>
+              </ListItemButton>
             </Link>
           ))
         )}
