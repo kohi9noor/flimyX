@@ -15,7 +15,6 @@ import {
   AccountCircle,
   Brightness4,
   Brightness7,
-  Brightness1,
 } from "@mui/icons-material";
 
 import { Sidebar } from "../index";
@@ -25,6 +24,7 @@ import useStyle from "./style";
 import { useTheme } from "@mui/material/styles";
 
 import { Link } from "react-router-dom";
+import Search from "../Search/Search";
 
 const Navbar = () => {
   const classes = useStyle();
@@ -50,9 +50,9 @@ const Navbar = () => {
             </IconButton>
           )}
           <IconButton color="inherit" sx={{ ml: 1 }} onClick={() => {}}>
-            {theme.palette.mode == "dark" ? <Brightness7 /> : <Brightness4 />}
+            {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
-          {!isMobile && "search..."}
+          {!isMobile && <Search />}
           <div>
             {!isAuthEnticated ? (
               <Button color="inherit" onClick={() => {}}>

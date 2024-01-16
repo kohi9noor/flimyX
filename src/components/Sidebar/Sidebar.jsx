@@ -40,6 +40,7 @@ const Sidebar = ({ setMobileOpen }) => {
 
   useEffect(() => {
     setMobileOpen(false);
+    console.log("Genre or category changed:", genreIdOrCategoryName);
   }, [genreIdOrCategoryName]);
 
   return (
