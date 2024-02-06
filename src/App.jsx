@@ -40,7 +40,7 @@ const App = () => {
         <Route path="8" element={<Error />} />
       </Routes>
 
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 };
