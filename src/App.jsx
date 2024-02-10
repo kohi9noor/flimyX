@@ -16,6 +16,7 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     fetchApiConfig();
+    genresCall();
   }, []);
 
   const fetchApiConfig = () => {
@@ -29,6 +30,24 @@ const App = () => {
       dispatch(getAPiConfiguration(url));
     });
   };
+  const genresCall = async () => {
+    let promise = [];
+    let endPoint = ["tv", "movie"];
+    let allGenres = {};
+
+    endPoint.forEach((url) => {
+      promise.push(fetchDataFromApi(`/genre/${url}/list`));
+    });
+    const data = await Promise.all(promise);
+
+    data.forEach(({ genres }) => {
+      genres.forEach((item) => {
+        allGenres[item.id] = item.name;
+      });
+    });
+    dispatch(getGenres(allGenres));
+  };
+
   return (
     <BrowserRouter>
       <Header />
