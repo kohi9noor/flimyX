@@ -6,7 +6,7 @@ import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import logo from "../../assets/Moviex-images/movix-logo.svg";
+import logo from "../../assets/Moviex-images/navbar.png";
 import { ContentWrapper } from "../contentWrapper/ContentWrapper";
 
 const Header = () => {
