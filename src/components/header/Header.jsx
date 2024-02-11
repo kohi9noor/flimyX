@@ -55,10 +55,12 @@ const Header = () => {
   const SearchQueryhanlder = (event) => {
     if (event.key === "Enter" && query.length > 0) {
       navigate(`/search/${query}`);
+    } else {
+      navigate(`search/${query}`);
     }
-    setTimeout(() => {
-      setShowSearch(false);
-    }, 1000);
+    // setTimeout(() => {
+    //   setShowSearch(false);
+    // }, 1000);
   };
 
   const navigationHandler = (type) => {
@@ -68,6 +70,8 @@ const Header = () => {
       navigate("/explore/tv");
     }
   };
+
+  console.log(query);
 
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
@@ -106,7 +110,7 @@ const Header = () => {
                 onKeyUp={SearchQueryhanlder}
               />
               <VscChromeClose onClick={() => setShowSearch(false)} />
-              <button></button>
+              <button onClick={SearchQueryhanlder}>Search</button>
             </div>
           </ContentWrapper>
         </div>
