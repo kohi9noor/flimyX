@@ -1,8 +1,16 @@
-# React + Vite
+# FilmX
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Description:**
+FilmX is a dynamic movie information website built using the TMDb (The Movie Database) API. With FilmX, users can easily search for their favorite movies, explore detailed information such as plot summaries, cast details, and trailers. The website provides a seamless experience for discovering similar movies and allows users to delve into the world of cinema. Whether you're a movie enthusiast or just looking for your next favorite film, FilmX has you covered.
 
-Currently, two official plugins are available:
+**Features:**
+- **Movie Search:** Find detailed information on a wide range of movies.
+- **Similar Movies:** Discover films that are similar to your favorites.
+- **Trailer Showcase:** Watch trailers directly on the website.
+- **Cast and Crew Details:** Explore information about the writers, cast, and crew.
+- **User-Friendly Interface:** Enjoy a clean and intuitive design for a smooth user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Installation:**
+1. Install dependencies with `npm install`.
+2. configure the `.env file`
+3. Run the project using `npm run dev`.
